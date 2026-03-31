@@ -1,0 +1,24 @@
+[package]
+name = "ffcue"
+version = "0.1.0"
+authors = ["tianfangchang <tianfangchang@gmail.com>"]
+description = "CUE sheet parser with automatic CJK encoding detection and fuzzy file path resolution"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/TianfangChang/ffcue.git"
+keywords = ["cue", "cuesheet", "audio", "parser", "cjk"]
+categories = ["parser-implementations", "multimedia::audio"]
+
+[dependencies]
+chardetng  = "0.1"
+encoding_rs = "0.8"
+thiserror = "2"
+
+[features]
+default = ["resolver"]
+resolver = []
+serde = ["dep:serde"]
+
+[dependencies.serde]
+version = "1"
+features = ["derive"]
+optional = true
