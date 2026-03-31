@@ -195,7 +195,7 @@ Note: `ffcue` prioritizes robustness in real-world CJK environments, ensuring th
 
 ## 致谢 / Acknowledgements
 
-This project was designed and implemented with reference to the following open-source projects (listed in alphabetical order):
+This project was designed and implemented with reference to the following open-source projects:
 
 - rcue — https://github.com/gyng/rcue
 - cuna — https://github.com/snylonue/cuna
@@ -207,7 +207,7 @@ We would like to express our sincere appreciation to the authors and contributor
 
 Additional thanks to Claude for assistance with coding, problem-solving, and implementation discussions during development.
 
-本项目在设计与实现过程中参考并受益于以下开源项目（按字母顺序排列）：
+本项目在设计与实现过程中参考并受益于以下开源项目：
 
 - rcue — https://github.com/gyng/rcue
 - cuna — https://github.com/snylonue/cuna
