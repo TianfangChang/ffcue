@@ -77,6 +77,12 @@ assert_eq!(sheet.title.as_deref(), Some("Album"));
 
 ### Decode raw bytes / 手动解码原始字节
 
+The decoder (`src/parser.rs::decode_text`) uses a 4-level fallback strategy / 解码器（`src/parser.rs::decode_text`）包含 4 级回退策略：
+1. **UTF-8 BOM**
+2. **UTF-16 LE BOM**
+3. **UTF-16 BE BOM**
+4. **chardetng** auto-detection for CJK/unknown encodings / 针对 CJK/未知编码的自动推断
+
 ```rust
 use ffcue::parser::decode_text;
 
@@ -108,7 +114,7 @@ if let Some(path) = resolve_audio_path(cue_dir, &sheet.files, sheet.files.len() 
 }
 ```
 
-The resolver uses a 4-level strategy / 解析器使用 4 级策略：
+The resolver uses a 4-level strategy (see `src/resolver.rs::resolve_audio_path`) / 路径解析包含 4 级推断策略（详情见 `src/resolver.rs::resolve_audio_path`）：
 
 1. **Direct match / 直接匹配** — `cue_dir/filename` exists  
 2. **Case-insensitive / 大小写不敏感** — scan directory ignoring case  
