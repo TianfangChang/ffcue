@@ -12,7 +12,6 @@ Existing Rust CUE parsers (`rcue`, `cuna`, `cue`) all assume UTF-8 input. In pra
 
 | Feature | rcue | cuna | cue (libcue) | ffcue |
 |---------|------|------|--------------|-------|
-| Pure Rust | ✅ | ✅ | ❌ (C FFI) | ✅ |
 | License | MIT | MIT | GPL-2.0 | MIT / Apache-2.0 |
 | CJK encoding detection | ❌ | ❌ | ❌ | ✅ |
 | UTF-16 BOM | ❌ | ❌ | ❌ | ✅ |
@@ -140,6 +139,31 @@ println!("{:?}", dur); // 225.493333...s
 // Ord comparison based on total_frames / 基于 total_frames 的排序比较
 let earlier = CueTimestamp { minutes: 3, seconds: 45, frames: 0 };
 assert!(earlier < ts);
+```
+
+### Serialize and Deserialize (serde Optional Feature) / 序列化与反序列化 (serde 选项)
+
+First, enable the `serde` feature in your `Cargo.toml`:
+首先，在您的 `Cargo.toml` 中开启 `serde` 特性：
+
+```toml
+[dependencies]
+ffcue = { version = "0.1", features = ["serde"] }
+```
+
+Then you can readily serialize the parsed `CueSheet` model into formats like JSON:
+然后即可将解析出 `CueSheet` 模型轻松序列化为 JSON 等格式：
+
+```rust,ignore
+use ffcue::parser::parse_cue_text;
+use serde_json;
+
+let cue_text = "TITLE \"Example\"";
+let sheet = parse_cue_text(None, cue_text);
+
+// Serialize to JSON String / 序列化为 JSON 字符串
+let json_str = serde_json::to_string_pretty(&sheet).unwrap();
+println!("{}", json_str);
 ```
 
 ## Data Model / 数据模型
