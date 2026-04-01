@@ -1,2 +1,4 @@
 /target
 Cargo.lock
+diff.patch
+diff.utf8.patch

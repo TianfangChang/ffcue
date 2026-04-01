@@ -193,3 +193,26 @@ impl CueTimestamp {
         self.total_frames() * 1000 / 75
     }
 }
+
+// ──────────────────────────────────────────────────────────
+//  虚拟轨道引用（连接 CUE 层和播放层） / Virtual Track Reference
+// ──────────────────────────────────────────────────────────
+
+/// 从 CUE 虚拟路径解析后的播放参数 / Playback parameters parsed from a CUE virtual path
+#[derive(Debug, Clone, PartialEq)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub struct VirtualTrackRef {
+    /// 真实音频文件的绝对路径 / Absolute path of the real audio file
+    pub audio_path: String,
+    /// 播放起始位置（INDEX 01） / Playback start position (INDEX 01)
+    pub start: Duration,
+    /// 播放结束位置（下一轨边界）；None = 播放到文件末尾 / Playback end position (next track boundary); None = play to EOF
+    pub end: Option<Duration>,
+}
+
+impl VirtualTrackRef {
+    /// 虚拟轨道时长（如果已知终点） / Virtual track duration (if end is known)
+    pub fn duration(&self) -> Option<Duration> {
+        self.end.map(|e| e.saturating_sub(self.start))
+    }
+}

@@ -1,6 +1,7 @@
 [package]
 name = "ffcue"
 version = "0.1.0"
+edition = "2021"
 authors = ["tianfangchang <tianfangchang@gmail.com>"]
 description = "CUE sheet parser with automatic CJK encoding detection and fuzzy file path resolution"
 license = "MIT OR Apache-2.0"

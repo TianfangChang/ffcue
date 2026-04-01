@@ -193,7 +193,7 @@ Below is a comparison of supported directives and features across existing Rust 
 
 Note: `ffcue` prioritizes robustness in real-world CJK environments, ensuring that metadata is preserved even when encoding varies across different sources.
 
-## 致谢 / Acknowledgements
+## Acknowledgements / 致谢
 
 This project was designed and implemented with reference to the following open-source projects:
 
