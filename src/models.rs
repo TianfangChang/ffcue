@@ -19,6 +19,8 @@ pub struct CueSheet {
     pub cue_path: Option<PathBuf>,
     /// CATALOG（条形码 / EAN） / CATALOG (Barcode / EAN)
     pub catalog: Option<String>,
+    /// CDTEXTFILE 文件路径 / CDTEXTFILE file path
+    pub cdtextfile: Option<String>,
     /// 顶级 PERFORMER（专辑艺术家） / Top-level PERFORMER (Album Artist)
     pub performer: Option<String>,
     /// 顶级 TITLE（专辑名） / Top-level TITLE (Album Title)

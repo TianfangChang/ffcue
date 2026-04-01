@@ -185,7 +185,6 @@ Below is a comparison of supported directives and features across existing Rust 
 | **ISRC** | ✅ | ✅ | ✅ | ✅ |
 | **FLAGS** | ✅ | ✅ | ✅ | ✅ |
 | **REM** (Key-value / 键值对) | ✅ | ✅ | ✅ | ✅ |
-| **CDTEXTFILE** | ✅ | ✅ | ✅ | Ignored / 忽略 |
 | **CJK Encoding Detection** | ❌ | ❌ | ❌ | **✅ (Auto)** |
 | **UTF-16 LE/BE** | ❌ | ❌ | ❌ | **✅** |
 | **Fuzzy Path Resolution** | ❌ | ❌ | ❌ | **✅** |

@@ -73,6 +73,7 @@ fn parse_cue_text_inner(cue_path: Option<&Path>, text: &str) -> CueSheet {
     let mut sheet = CueSheet {
         cue_path: cue_path.map(|p| p.to_path_buf()),
         catalog:    None,
+        cdtextfile: None,
         performer:  None,
         title:      None,
         songwriter: None,
@@ -221,7 +222,7 @@ fn parse_cue_text_inner(cue_path: Option<&Path>, text: &str) -> CueSheet {
             }
 
             "CDTEXTFILE" => {
-                // 忽略，不影响播放 / Ignore, does not affect playback
+                sheet.cdtextfile = Some(unquote(rest));
             }
 
             _ => {
@@ -518,6 +519,7 @@ FILE "album.flac" WAVE
         let sheet = parse_cue_text(Some(Path::new("test.cue")), text);
         assert_eq!(sheet.files.len(), 1);
         assert_eq!(sheet.files[0].tracks.len(), 1);
+        assert_eq!(sheet.cdtextfile.as_deref(), Some("disc.cdt"));
     }
 
     #[test]
