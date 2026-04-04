@@ -60,6 +60,7 @@
 pub mod error;
 pub mod models;
 pub mod parser;
+pub mod scanner;
 
 #[cfg(feature = "resolver")]
 pub mod resolver;
@@ -69,6 +70,7 @@ pub mod resolver;
 pub use error::{CueError, Result};
 pub use models::{CueSheet, CueFile, CueFileType, CueTrack, CueTrackType, CueIndex, CueTimestamp};
 pub use parser::{parse_cue_file, parse_cue_text, decode_text};
+pub use scanner::{get_track_boundaries, get_htoa_boundary, HTOA_MIN_DURATION_SECS};
 
 #[cfg(feature = "resolver")]
 pub use resolver::{resolve_audio_path, resolve_all_files, resolve_all_files_in};

@@ -156,6 +156,22 @@ fn parse_cue_text_inner(cue_path: Option<&Path>, text: &str) -> CueSheet {
                 let track_type = CueTrackType::from_str(type_str)
                     .unwrap_or(CueTrackType::Audio);
 
+                if current_file.is_none() {
+                    // 自动创建一个缺省的 FILE 块，处理不包含 FILE 的嵌入式 CUE
+                    // Automatically create a default FILE block to handle embedded CUEs without FILE directives
+                    let default_filename = sheet.cue_path.as_ref()
+                        .and_then(|p| p.file_name())
+                        .and_then(|n| n.to_str())
+                        .unwrap_or("dummy.wav")
+                        .to_string();
+                    sheet.files.push(CueFile {
+                        filename: default_filename,
+                        filetype: CueFileType::Wave,
+                        tracks: Vec::new(),
+                    });
+                    current_file = Some(sheet.files.len() - 1);
+                }
+
                 if let Some(fi) = current_file {
                     sheet.files[fi].tracks.push(CueTrack {
                         number,
@@ -172,8 +188,6 @@ fn parse_cue_text_inner(cue_path: Option<&Path>, text: &str) -> CueSheet {
                     });
                     current_track = Some(sheet.files[fi].tracks.len() - 1);
                 }
-                // 如果 TRACK 出现在 FILE 之前（不规范），忽略
-                // If TRACK appears before FILE (non-standard), ignore it
             }
 
             "INDEX" => {
